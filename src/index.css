@@ -17,8 +17,9 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Disaster-themed primary colors */
+    --primary: 214 100% 50%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -29,29 +30,36 @@ All colors MUST be HSL.
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
+    /* Emergency alert colors */
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Success/safety colors */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    /* Warning colors */
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --ring: 214 100% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Disaster-specific gradient backgrounds */
+    --gradient-hero: linear-gradient(135deg, hsl(214 100% 50%), hsl(220 91% 65%));
+    --gradient-emergency: linear-gradient(135deg, hsl(0 84% 60%), hsl(15 78% 55%));
+    --gradient-safety: linear-gradient(135deg, hsl(142 76% 36%), hsl(120 60% 40%));
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -65,7 +73,7 @@ All colors MUST be HSL.
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
+    --primary: 214 100% 60%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
     --secondary: 217.2 32.6% 17.5%;
@@ -80,9 +88,20 @@ All colors MUST be HSL.
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
+    --success: 142 76% 30%;
+    --success-foreground: 210 40% 98%;
+
+    --warning: 38 92% 40%;
+    --warning-foreground: 210 40% 98%;
+
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --ring: 214 100% 60%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(214 100% 60%), hsl(220 91% 75%));
+    --gradient-emergency: linear-gradient(135deg, hsl(0 62% 30%), hsl(15 68% 35%));
+    --gradient-safety: linear-gradient(135deg, hsl(142 76% 30%), hsl(120 50% 30%));
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -101,5 +120,61 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Accessibility improvements */
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    @apply ring-2 ring-ring ring-offset-2;
+  }
+}
+
+@layer components {
+  /* Emergency button variants */
+  .btn-emergency {
+    @apply bg-destructive text-destructive-foreground hover:bg-destructive/90;
+  }
+
+  .btn-safety {
+    @apply bg-success text-success-foreground hover:bg-success/90;
+  }
+
+  .btn-warning {
+    @apply bg-warning text-warning-foreground hover:bg-warning/90;
+  }
+
+  /* Card variants for different module types */
+  .card-emergency {
+    @apply border-destructive/20 bg-gradient-to-br from-destructive/5 to-destructive/10;
+  }
+
+  .card-safety {
+    @apply border-success/20 bg-gradient-to-br from-success/5 to-success/10;
+  }
+
+  .card-theory {
+    @apply border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10;
+  }
+
+  /* Progress indicators */
+  .progress-emergency {
+    @apply bg-destructive;
+  }
+
+  .progress-safety {
+    @apply bg-success;
+  }
+
+  .progress-theory {
+    @apply bg-primary;
+  }
+
+  /* Achievement badges */
+  .badge-achievement {
+    @apply bg-gradient-to-r from-yellow-400 to-yellow-600 text-yellow-900 font-semibold px-3 py-1 rounded-full text-sm shadow-sm;
   }
 }
